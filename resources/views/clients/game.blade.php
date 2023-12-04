@@ -40,7 +40,7 @@
          </div>
       </div>
       <div class="w-1/2 h-full p-10">
-         <div class="hidden rounded-xl" id="game-container">
+         <div class="hidden flex justify-center rounded-xl" id="game-container">
 
          </div>
 
