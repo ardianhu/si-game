@@ -1,1 +1,0 @@
-<div class="text-lg text-red-800">coba navbar</div>

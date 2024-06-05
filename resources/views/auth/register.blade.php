@@ -5,7 +5,7 @@
 
 <main>
     <section class="absolute w-full h-full">
-        <div class="absolute top-0 w-full h-full bg-gray-900" style="background-image: url(/storage/assets/register_bg_2.png); background-size: 100%; background-repeat: no-repeat;"></div>
+        <div class="absolute top-0 w-full h-full bg-gray-900" style="background-image: url(/assets/img/background.webp); background-size: 100%; background-repeat: no-repeat;"></div>
         <div class="container mx-auto px-4 h-full">
             <div class="flex content-center items-center justify-center h-full">
                 <div class="w-full lg:w-4/12 px-4">
@@ -81,7 +81,7 @@
 <script>
     $(document).ready(function() {
         // Listen for form submission
-        $("form").on("submit", function(e) {
+        $("#register_form").on("submit", function(e) {
             e.preventDefault(); // Prevent the default form submission
             // console.log(formData);
             // Send an Ajax request to the server
@@ -98,6 +98,7 @@
                     // Handle the response from the server, e.g., redirect or display a message
                     if (response.success) {
                         console.log('berhasil')
+                        window.location.href = "{{ url('/game') }}";
                     } else {
                         console.log('gagal')
                     }

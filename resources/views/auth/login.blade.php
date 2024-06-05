@@ -83,7 +83,7 @@
 <script>
     $(document).ready(function() {
         // Listen for form submission
-        $("form").on("submit", function(e) {
+        $("#login_form").on("submit", function(e) {
             e.preventDefault(); // Prevent the default form submission
 
             // Send an Ajax request to the server
@@ -99,11 +99,7 @@
                     // Handle the response from the server, e.g., redirect or display a message
                     if (response.success) {
                         console.log('berhasil')
-                        if (response.is_admin){
-                            window.location.href = "{{ url('/admin') }}"
-                        } else {
-                            window.location.href = "{{ url('/game') }}";
-                        }
+                        window.location.href = "{{ url('/game') }}";
                     } else {
                         console.log('gagal')
                     }

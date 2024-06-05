@@ -20,10 +20,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'number',
         'email',
         'password',
-        'is_admin'
+        'avatar',
+        'level_id'
     ];
 
     /**
@@ -45,8 +45,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function invitations()
+
+    public function level()
     {
-        return $this->hasMany(Invitation::class);
+        return $this->belongsTo(Level::class, 'level_id', 'id');
     }
 }

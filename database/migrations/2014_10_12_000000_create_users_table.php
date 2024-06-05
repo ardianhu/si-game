@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('number')->nullable();
             $table->string('email')->unique();
-            $table->string('avatar')->nullable();
-            $table->boolean('is_admin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('avatar')->nullable();
+            $table->unsignedBigInteger('level_id')->default(1);
+            $table->foreign('level_id')->references('id')->on('levels');
             $table->rememberToken();
             $table->timestamps();
         });
