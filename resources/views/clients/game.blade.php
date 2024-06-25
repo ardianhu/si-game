@@ -2,17 +2,30 @@
 @section('title')
 @endsection
 @section('content')
+<!-- Modal -->
+<div id="myModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 z-50 flex items-center justify-center">
+   <div class="bg-gray-800 rounded-lg shadow-lg w-full h-full flex flex-col">
+      <div class="flex justify-between items-center p-4 border-b border-gray-500">
+         <h2 class="text-xl pl-6 font-semibold text-white">{{ $logged->level->level_name }}</h2>
+         <button id="closeModalBtn" class="text-gray-300 hover:text-gray-600">&times;</button>
+      </div>
+      <div class="p-10 flex-grow overflow-auto text-gray-300 leading-loose">
+         <!-- <pre style="white-space: pre-wrap; word-wrap: break-word;">{!! $logged->level->modul !!}</pre> -->
+         <div class="prose prose-invert">
+            {!! $logged->level->modul !!}
+         </div>
+      </div>
+      <div class="flex justify-end p-4 border-t border-gray-500">
+         <button id="closeModalBtnFooter" class="bg-red-500 text-white px-4 py-2 rounded">Close Modul</button>
+      </div>
+   </div>
+</div>
 <div class="bg-gray-900 min-h-screen flex flex-col-reverse md:flex-row space-y-20 md:space-y-0 md:space-x-10 md:pt-20 px-10">
    <div class="w-full md:w-1/2 h-full">
       <div class="bg-slate-800 text-slate-400 rounded-t-xl pl-2 p-1">Python Editor</div>
-      <textarea name="" id="py-editor" cols="30" rows="10">
-#jangan hapus kode ini
-#pertama kita akan belajar bagaimana cara untuk menampilkan output dari program python
-#dengan cara mengetikkan print('ubah tulisan ini dengan output yang diinginkan')
-#masukkan kode di bawah ini
-</textarea>
+      <textarea name="" id="py-editor" cols="60" rows="10">{{ $logged->level->main_code }}</textarea>
       <div class="rounded-b-xl flex justify-between items-center bg-slate-800 p-2">
-         <button class="w-[100px] bg-slate-900 h-[50px] flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-[#fff]">
+         <button id="openModul-button" class="w-[100px] bg-slate-900 h-[50px] flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-[#fff]">
             Modul
          </button>
          <button id="run-button" class="w-[100px] bg-slate-900 h-[50px] flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-[#fff]">
@@ -30,7 +43,7 @@
       </div> -->
       <div id="user_data" data-level-number="{{ $logged->level->level_number }}">{{ $logged->level->level_number }}</div>
       <div class="font-mono bg-neutral-800 border-gray-100 border border-solid text-gray-50 rounded-lg min-h-[100px] mt-5">
-         <div class="bg-gray-500 rounded-t-lg pl-2">Output</div>
+         <div class="bg-gray-500 rounded-t-lg pl-2">Output Console</div>
          <div class="p-2">#Hasil kode di atas akan ditampilkan di sini</div>
          <div id="output" class="p-2"></div>
       </div>
@@ -39,6 +52,25 @@
       <!-- <div class="hidden flex justify-center rounded-xl" id="game-container">
 
          </div> -->
+      <div class="stopwatch">
+         <div class="text-center text-white" id="time">
+            <span class="text-3xl" id="hr">00</span>
+            <span class="text-xl">Hr</span>
+            <span class="text-3xl" id="min">00</span>
+            <span class="text-xl">Min</span>
+            <span class="text-3xl" id="sec">00</span>
+            <span class="text-xl">Sec</span>
+            <span class="text-3xl" id="count">00</span>
+         </div>
+         <!-- <div class="mt-6 flex justify-center">
+            <button class="bg-green-500 hover:bg-green-700
+                     text-white font-bold py-2 px-4 rounded mr-2" id="start">Start</button>
+            <button class="bg-blue-500 hover:bg-blue-700
+                     text-white font-bold py-2 px-4 rounded mr-2" id="stop">Stop</button>
+            <button class="bg-red-500 hover:bg-red-700
+                     text-white font-bold py-2 px-4 rounded" id="reset">Reset</button>
+         </div> -->
+      </div>
       <div class="flex justify-center rounded-xl">
          <!-- <canvas id="game-canvas" class="w-full bg-blue-700"></canvas> -->
          <style>
@@ -64,24 +96,24 @@
             }
 
             .green {
-               background-image: url('assets/game/pavement.png');
+               background-image: url('assets/game/asset_green.jpg');
                background-size: cover;
                /* background-color: lightgreen; */
             }
 
             .red {
-               background-image: url('assets/game/water.png');
+               background-image: url('assets/game/asset_red.jpg');
                background-size: cover;
                /* background-color: lightcoral; */
             }
 
             .finish {
-               background-image: url('assets/game/finish.png');
+               background-image: url('assets/game/asset_finish.jpg');
                background-size: cover;
             }
 
             .player {
-               background-image: url('assets/game/player.png');
+               background-image: url('assets/game/asset_player.jpg');
                background-size: cover;
                /* background-color: yellow; */
             }
@@ -95,6 +127,7 @@
 
 <script>
    var levelNumber = "{{ $logged->level->level_number }}";
+   var mainCode = `{{ $logged->level->main_code }}`;
 </script>
 <script src="{{ asset('/assets/game/game.js') }}"></script>
 <script>

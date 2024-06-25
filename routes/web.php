@@ -18,15 +18,16 @@ use App\Models\Invitation;
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
-});
+// Route::get('/', function () {
+//     return view('landing');
+// });
 // Route::get('/login', function () {
 //     return view('auth.login');
 // });
 // Route::post('/login', [AuthController::class, 'login']);
 // Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 // Route::post('/register', 'Auth\RegisterController@register');
+Route::get('/', [HomeController::class, 'index']);
 Route::get('/login', [AuthController::class, 'showLoginForm']);
 Route::get('/register', [AuthController::class, 'showRegisterForm']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -36,4 +37,5 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => 'user'], function () {
     Route::get('/game', [HomeController::class, 'game']);
+    Route::post('/update-level', [HomeController::class, 'updateLevel']);
 });

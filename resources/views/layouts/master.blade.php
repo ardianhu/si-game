@@ -14,10 +14,12 @@
     <script src="{{ asset('assets/cm/lib/codemirror.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/cm/lib/codemirror.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/cm/theme/ayu-dark.css') }}">
+    <script src="{{ asset('assets/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('assets/cm/mode/python/python.js') }}"></script>
     @vite('resources/css/app.css')
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
     <script src="{{ asset('assets/jquery.js') }}"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- <script src="sweetalert2.min.js"></script>
     <link rel="stylesheet" href="sweetalert2.min.css"> -->
 </head>

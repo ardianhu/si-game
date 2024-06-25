@@ -13,4 +13,8 @@ class Level extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function scores()
+    {
+        return $this->hasMany(Score::class);
+    }
 }

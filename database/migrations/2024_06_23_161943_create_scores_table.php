@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('levels', function (Blueprint $table) {
+        Schema::create('scores', function (Blueprint $table) {
             $table->id();
-            $table->string('level_name');
-            $table->string('level_number');
-            $table->text('main_code');
-            $table->text('modul');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('level_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('level_id')->references('id')->on('levels');
+            $table->integer('score');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('levels');
+        Schema::dropIfExists('scores');
     }
 };
