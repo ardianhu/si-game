@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -39,27 +40,45 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        // Validate the user's input
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required|email|unique:users', // Unique email validation
-        //     'password' => 'required', // Adjust validation rules as needed
-        // ]);
-        // dd($request->all());
+        // Define validation rules
+        $rules = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => [
+                'required',
+                'string',
+                'min:8', // Minimum length of 8 characters
+                'regex:/[a-z]/', // Must contain at least one lowercase letter
+                'regex:/[A-Z]/', // Must contain at least one uppercase letter
+                'regex:/[0-9]/', // Must contain at least one digit
+            ],
+        ];
 
-        // Create a new user with the provided data
+        // Define custom error messages
+        $messages = [
+            'password.min' => 'Password must be at least 8 characters long.',
+            'password.regex' => 'Password must contain at least one number, uppercase, and lowercase letter.',
+            'email.unique' => 'The email address is already registered.',
+            'required' => ':attribute is required.'
+        ];
+
+        // Validate the request
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // Check if validation fails
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password), // Hash the password
         ]);
 
-        // $password = $request->input('password');
-
-        // dd($password);
-        // You can also manually log in the user here if desired
-
-        // Return a JSON response
         return response()->json([
             'success' => true,
             'message' => 'Register Berhasil!'

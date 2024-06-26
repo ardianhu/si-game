@@ -25,8 +25,7 @@ class DatabaseSeeder extends Seeder
 # "moveUp" untuk bergerak ke atas
 # "moveDown" untuk bergerak ke bawah
 # masukkan perintah di atas ke dalam fungsi print() untuk menjalankan karakter
-# contoh: print("moveRight")
-print()
+# contoh: ketik print("moveRight") di bawah ini dan tekan tombol "Run" untuk menjalankan program
 ',
             'modul' => '<div class="text-lg font-bold">Selamat datang di game Dell-A</div>
 Game ini adalah game adventure interaktifinteraktif yang dirancang untuk melatih keterampilan pemrograman Python sambil menghadirkan pengalaman bermain yang menyenangkan. Dalam permainan ini, pemain diminta untuk mengetik kode Python yang akan menggerakkan karakter utama berdasarkan perintah spesifik yang diberikan sebagai output. Tujuan utama dari permainan ini adalah untuk membawa karakter ke titik akhir atau finish point.
@@ -53,12 +52,10 @@ print("moveUp") // untuk menggerakkan karakter ke atas</code></pre>
             'level_number' => 2,
             'main_code' => '# gunakan variabel yang telah ada untuk menjalankan karakter
 rightCommand = "moveRight"
-leftCommand = "moveDown"
-upCommand = "moveUp"
-downCommand = "moveLeft"
-# masukkan variabel di atas ke dalam fungsi print() tanpa tanda petik untuk menjalankan karakter
-# perhatikan isi dari variabel yang akan digunakan bukan nama dari variabel 
-print(rightCommand)
+# buat variabel baru, isi dengan perintah "moveDown"
+
+# masukkan variabel di atas ke dalam fungsi print() tanpa tanda petik untuk menjalankan karakter 
+
 ',
             'modul' => '<div class="text-lg font-bold">Variabel dan Tipe Data</div>
 <p>Variabel adalah lokasi memori yang dicadangkan untuk menyimpan nilai-nilai. Ini berarti bahwa ketika Anda membuat sebuah variabel Anda memesan beberapa ruang di memori. Variabel menyimpan data yang dilakukan selama program dieksekusi, yang natinya isi dari variabel tersebut dapat diubah oleh operasi - operasi tertentu pada program yang menggunakan variabel.
@@ -198,13 +195,14 @@ Penulisan variabel Python sendiri juga memiliki aturan tertentu, yaitu:</p>
             'level_number' => 3,
             'main_code' => '# gunakan variabel yang telah ada untuk menjalankan karakter
 
-informatika = 274
-sistemInformasi = 125
-total = informatika + sistemInformasi
+mahasiswaInformatika = 274
+mahasiswaSistemInformasi = 125
+# buat variabel total yang berisi jumlah mahasiswa informatika + sistem informasi
+# contoh: variabelBaru = namaVariabel + namaVariabel
 
-# lengkapi kode di bawah ini
-# isi variabel berhenti dan terapkan operator aritmatika pada variabel hasil sehingga mempunyai nilai 390
-berhenti = 
+
+# buat variabel mahasiswaBerhenti dan terapkan operator aritmatika pada variabel hasil sehingga mempunyai nilai 390
+
 hasil = total
 
 # jangan hapus kode dibawah ini
@@ -295,8 +293,8 @@ if (hasil == 390):
             'level_number' => 4,
             'main_code' => '# isi variabel di bawah dengan nilai yang benar
 
-# isi variabel isMoveRightTwice dengan nilai boolean
-isMoveRightTwice = 
+# buat variabel isMoveRightTwice dengan nilai boolean True
+
 
 # isi variabel jumlahMoveDown dengan nilai integer ketika program berjalan
 jumlahMoveDown = int(input("Masukkan jumlah moveDown: (1/2/3)"))
@@ -359,14 +357,14 @@ elif angka < 0:
     print("Angka Negatif")
 else:
     print("Angka Nol")</code></pre>
-            <p>Penggunaan int() dalam variabel angka berfungsi untuk mengatur nilai dari variabel, dalam kasus ini nilai dari variabel harus integer atau int</p>'
+            <p>Penggunaan int() dalam variabel angka berfungsi untuk konversi nilai ke integer, dalam kasus ini nilai dari input akan di konversi ke integer atau int</p>'
         ]);
 
         Level::create([
             'level_name' => 'Perulangan / Looping',
             'level_number' => 5,
             'main_code' => 'commands = ["moveRight", "moveRight", "moveRight", "moveUp", "moveUp", "moveRight", "moveRight"]
-# buat perulangan for di bawah ini menggunakan variabel commands
+# buat perulangan for di bawah ini untuk looping variabel commands
 for
 
 # buat variabel di bawah ini dengan nama daftarPerintah yang berisi 4 perintah "moveDown"

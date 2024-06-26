@@ -31,7 +31,7 @@
                                     <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">Email</label><input type="email" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="Email" id="email" name="email" style="transition: all 0.15s ease 0s;" />
                                 </div>
                                 <div class="relative w-full mb-3">
-                                    <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">Password</label><input type="password" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="Password" id="password" name="password" style="transition: all 0.15s ease 0s;" />
+                                    <label class="block uppercase text-gray-700 text-xs font-bold mb-2" for="grid-password">Password</label><input type="password" class="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full" placeholder="Password must contain at least one number, uppercase, and lowercase letter" id="password" name="password" style="transition: all 0.15s ease 0s;" />
                                 </div>
                                 <div>
                                     <label class="inline-flex items-center cursor-pointer"><input id="customCheckLogin" type="checkbox" class="form-checkbox border-0 rounded text-gray-800 ml-1 w-5 h-5" style="transition: all 0.15s ease 0s;" /><span class="ml-2 text-sm font-semibold text-gray-700">Remember me</span></label>
@@ -83,15 +83,30 @@
         // Listen for form submission
         $("#register_form").on("submit", function(e) {
             e.preventDefault(); // Prevent the default form submission
-            // console.log(formData);
+
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var password = $("#password").val();
+
+            // Validate the inputs
+            if (!email || !password) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Name, email, and password are required!',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
             // Send an Ajax request to the server
             $.ajax({
                 url: '/register', // Specify the URL to your login controller method
                 type: 'POST',
                 data: {
-                    name: $("#name").val(),
-                    email: $("#email").val(),
-                    password: $("#password").val(),
+                    name: name,
+                    email: email,
+                    password: password,
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
@@ -99,13 +114,25 @@
                     if (response.success) {
                         console.log('berhasil')
                         window.location.href = "{{ url('/game') }}";
-                    } else {
-                        console.log('gagal')
                     }
-                    console.log(response)
                 },
                 error: function(xhr) {
                     // Handle any errors, e.g., display an error message
+                    if (xhr.status === 422) {
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = '';
+                        for (var key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                errorMessage += errors[key][0] + '\n';
+                            }
+                        }
+                        Swal.fire({
+                            title: 'Error!',
+                            text: errorMessage,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
                 }
             });
         });

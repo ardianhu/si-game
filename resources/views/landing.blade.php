@@ -14,7 +14,7 @@
                 <table class="min-w-full bg-gray-900 rounded-lg">
                     <thead>
                         <tr class="bg-gray-700 text-gray-300 text-left">
-                            <th class="py-2 px-4">#</th>
+                            <th class="py-2 px-4">No</th>
                             <th class="py-2 px-4">Name</th>
                             <th class="py-2 px-4">Score</th>
                         </tr>
@@ -23,7 +23,7 @@
                         @foreach($leaderboard as $index => $score)
                         <tr class="{{ $index % 2 == 0 ? 'bg-gray-800' : 'bg-gray-700' }}">
                             <td class="py-2 px-4">{{ $index + 1 }}</td>
-                            <td class="py-2 px-4">{{ $score->user->name }}</td>
+                            <td class="py-2 px-4">{{ $score->user->name }}<br>Level: {{ $score->user->level->level_number }}</td>
                             <td class="py-2 px-4">{{ $score->total_score }}</td>
                         </tr>
                         @endforeach
@@ -83,7 +83,7 @@
     <div id="large-header" class="large-header">
         <canvas id="demo-canvas"></canvas>
         <div class=" main-title flex flex-col items-center space-y-4">
-            @if($logged->level->level_number > 1 && !$isFinishsed)
+            @if($logged->level->level_number > 1 && !$isFinished)
             <button onclick="playGame()" class="group cursor-pointer relative cursor-default w-[120px] h-[60px] bg-[linear-gradient(144deg,_#af40ff,_#5b42f3_50%,_#00ddeb)] text-white whitespace-nowrap flex flex-wrap rounded-lg overflow-hidden">
                 <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">Continue</span>
                 <div class="w-[10px] h-[10px] blur-[5px] bg-[rgb(30,41,59)] delay-[0.2s] duration-[0.4s] hover:bg-transparent hover:delay-0 hover:duration-0 group-focus:bg-transparent group-focus:delay-[0.5s]"></div>
@@ -530,19 +530,24 @@
                 }
             });
 
+            var oldUser = '{{ $isFinished }}'
+            console.log(oldUser)
             $('#newGame-button').click(function() {
-                Swal.fire({
-                    title: 'New Game?',
-                    text: 'This action will override your saved proccess!',
-                    icon: 'warning',
-                    confirmButtonText: 'OK'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '/new-game';
-                    }
-                });
+                if (oldUser.length === 0) {
+                    window.location.href = '/new-game';
+                } else {
+                    Swal.fire({
+                        title: 'New Game?',
+                        text: 'This action will override your saved progress!',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/new-game';
+                        }
+                    });
+                }
             });
-
         })();
     </script>
     <!-- <div class="relative pt-16 pb-32 min-h-screen flex items-center justify-center">

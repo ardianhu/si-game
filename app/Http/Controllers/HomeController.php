@@ -21,8 +21,8 @@ class HomeController extends Controller
             ->get();
 
         $logged = auth()->user();
-        $isFinishsed = Score::where('user_id', $logged->id)->where('level_id', 7)->first();
-        return view('landing', compact('leaderboard', 'logged', 'isFinishsed'));
+        $isFinished = Score::where('user_id', $logged->id)->where('level_id', 7)->first();
+        return view('landing', compact('leaderboard', 'logged', 'isFinished'));
     }
 
     public function game()

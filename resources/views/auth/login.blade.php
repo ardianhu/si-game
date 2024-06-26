@@ -86,13 +86,27 @@
         $("#login_form").on("submit", function(e) {
             e.preventDefault(); // Prevent the default form submission
 
+            var email = $("#email").val();
+            var password = $("#password").val();
+
+            // Validate the inputs
+            if (!email || !password) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Email and password are required!',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
             // Send an Ajax request to the server
             $.ajax({
                 url: '/login', // Specify the URL to your login controller method
                 type: 'POST',
                 data: {
-                    email: $("#email").val(),
-                    password: $("#password").val(),
+                    email: email,
+                    password: password,
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
@@ -100,13 +114,16 @@
                     if (response.success) {
                         console.log('berhasil')
                         window.location.href = "{{ url('/') }}";
-                    } else {
-                        console.log('gagal')
                     }
-                    console.log(response)
                 },
                 error: function(xhr) {
                     // Handle any errors, e.g., display an error message
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Invalid email or password!',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
                 }
             });
         });
