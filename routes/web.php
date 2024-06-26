@@ -27,7 +27,7 @@ use App\Models\Invitation;
 // Route::post('/login', [AuthController::class, 'login']);
 // Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 // Route::post('/register', 'Auth\RegisterController@register');
-Route::get('/', [HomeController::class, 'index']);
+
 Route::get('/login', [AuthController::class, 'showLoginForm']);
 Route::get('/register', [AuthController::class, 'showRegisterForm']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -36,6 +36,8 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // Route::post('/login', [Auth\LoginController::class, 'login']);
 
 Route::group(['middleware' => 'user'], function () {
+    Route::get('/', [HomeController::class, 'index']);
     Route::get('/game', [HomeController::class, 'game']);
+    Route::get('/new-game', [HomeController::class, 'newGame']);
     Route::post('/update-level', [HomeController::class, 'updateLevel']);
 });

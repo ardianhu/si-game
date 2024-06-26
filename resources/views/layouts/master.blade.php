@@ -14,7 +14,8 @@
     <script src="{{ asset('assets/cm/lib/codemirror.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/cm/lib/codemirror.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/cm/theme/ayu-dark.css') }}">
-    <script src="{{ asset('assets/sweetalert2.all.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/sweetalert2/dark.min.css') }}">
+    <script src="{{ asset('assets/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/cm/mode/python/python.js') }}"></script>
     @vite('resources/css/app.css')
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->

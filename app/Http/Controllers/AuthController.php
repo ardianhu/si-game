@@ -12,7 +12,7 @@ class AuthController extends Controller
     public function showLoginForm()
     {
         if (Auth::check()) {
-            return redirect('/game');
+            return redirect('/');
         }
         return view('auth.login');
     }

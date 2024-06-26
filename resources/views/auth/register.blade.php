@@ -5,7 +5,7 @@
 
 <main>
     <section class="absolute w-full h-full">
-        <div class="absolute top-0 w-full h-full bg-gray-900" style="background-image: url(/assets/img/background.webp); background-size: 100%; background-repeat: no-repeat;"></div>
+        <div class="absolute top-0 w-full h-full bg-gray-900"></div>
         <div class="container mx-auto px-4 h-full">
             <div class="flex content-center items-center justify-center h-full">
                 <div class="w-full lg:w-4/12 px-4">
@@ -19,9 +19,9 @@
                             <hr class="mt-6 border-b-1 border-gray-400" />
                         </div>
                         <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                            <div class="text-gray-500 text-center mb-3 font-bold">
+                            <!-- <div class="text-gray-500 text-center mb-3 font-bold">
                                 <small>Masukkan data anda di bawah ini</small>
-                            </div>
+                            </div> -->
                             <form method="POST" action="#" id="register_form" enctype="multipart/form-data">
                                 @csrf
                                 <div class="relative w-full mb-3">
@@ -50,14 +50,14 @@
         <footer class="absolute w-full bottom-0 bg-gray-900 pb-6">
             <div class="container mx-auto px-4">
                 <hr class="mb-6 border-b-1 border-gray-700" />
-                <div class="flex flex-wrap items-center md:justify-between justify-center">
-                    <div class="w-full md:w-4/12 px-4">
-                        <div class="text-sm text-white font-semibold py-1">
-                            Copyright © 2019
-                            <a href="https://www.creative-tim.com" class="text-white hover:text-gray-400 text-sm font-semibold py-1">Creative Tim</a>
+                <div class="flex items-center  justify-center">
+                    <div class="w-full px-4">
+                        <div class="text-center text-sm text-white font-semibold py-1">
+                            Copyright © 2024
+                            <a href="https://github.com/ardianhu/si-game" class="text-white hover:text-gray-400 text-sm font-semibold py-1">Dell-A Game</a>
                         </div>
                     </div>
-                    <div class="w-full md:w-8/12 px-4">
+                    <!-- <div class="w-full md:w-8/12 px-4">
                         <ul class="flex flex-wrap list-none md:justify-end  justify-center">
                             <li>
                                 <a href="https://www.creative-tim.com" class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3">Creative Tim</a>
@@ -72,7 +72,7 @@
                                 <a href="https://github.com/creativetimofficial/argon-design-system/blob/master/LICENSE.md" class="text-white hover:text-gray-400 text-sm font-semibold block py-1 px-3">MIT License</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </footer>

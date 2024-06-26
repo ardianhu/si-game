@@ -19,7 +19,10 @@ class HomeController extends Controller
             ->orderBy('total_score', 'desc')
             ->take(10) // Adjust the number to get the top N users
             ->get();
-        return view('landing', compact('leaderboard'));
+
+        $logged = auth()->user();
+        $isFinishsed = Score::where('user_id', $logged->id)->where('level_id', 7)->first();
+        return view('landing', compact('leaderboard', 'logged', 'isFinishsed'));
     }
 
     public function game()
@@ -28,6 +31,18 @@ class HomeController extends Controller
         // dd($loged);
 
         return view('clients.game', compact('logged'));
+    }
+    public function newGame()
+    {
+        $logged = auth()->user();
+        $user = User::find($logged->id);
+
+        $user->level_id = 1;
+        $user->save();
+
+        Score::where('user_id', $logged->id)->delete();
+
+        return redirect('/game');
     }
     public function updateLevel(Request $request)
     {

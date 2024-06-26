@@ -7,31 +7,23 @@
         </div>
         <div class="lg:flex flex-grow items-center bg-white lg:bg-transparent lg:shadow-none hidden" id="example-collapse-navbar">
             <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
-                <li class="flex items-center">
+                <!-- <li class="flex items-center">
                     <a class="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold" href="#pablo"><i class="lg:text-gray-300 text-gray-500 fab fa-twitter text-lg leading-lg "></i><span class="lg:hidden inline-block ml-2">Twitter</span></a>
-                </li>
+                </li> -->
                 <li class="flex items-center">
                     @auth
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="mx-3 my-4 lg:my-2 cursor-pointer font-semibold overflow-hidden relative z-100 border border-cyan-500 group px-8 py-2">
-                            <span class="relative z-10 text-cyan-500 group-hover:text-white text-xl duration-500">Log out</span>
-                            <span class="absolute w-full h-full bg-cyan-500 -left-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:left-0 duration-500"></span>
-                            <span class="absolute w-full h-full bg-cyan-500 -right-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:right-0 duration-500"></span>
-                        </button>
+                        <button type="submit" class="m-4 bg-red-500 text-white px-4 py-2 rounded">Log out</button>
                     </form>
                     @else
-                    <button onclick="loginPage()" class="mx-3 my-4 lg:my-2 cursor-pointer font-semibold overflow-hidden relative z-100 border border-cyan-500 group px-8 py-2">
-                        <span class="relative z-10 text-cyan-500 group-hover:text-white text-xl duration-500">Login</span>
-                        <span class="absolute w-full h-full bg-cyan-500 -left-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:left-0 duration-500"></span>
-                        <span class="absolute w-full h-full bg-cyan-500 -right-32 top-0 -rotate-45 group-hover:rotate-0 group-hover:right-0 duration-500"></span>
-                    </button>
-                    @endauth
+                    <!-- <button onclick="loginPage()" class="bg-blue-500 text-white px-4 py-2 rounded">Login</button> -->
                     <script>
                         function loginPage() {
                             window.location.href = "{{ url('/login') }}";
                         }
                     </script>
+                    @endauth
                 </li>
             </ul>
         </div>

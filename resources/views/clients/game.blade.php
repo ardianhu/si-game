@@ -20,11 +20,11 @@
       </div>
    </div>
 </div>
-<div class="bg-gray-900 min-h-screen flex flex-col-reverse md:flex-row space-y-20 md:space-y-0 md:space-x-10 md:pt-20 px-10">
+<div class="bg-gray-900 pt-8 min-h-screen flex flex-col-reverse md:flex-row space-y-20 md:space-y-0 md:space-x-10 md:pt-20 px-10">
    <div class="w-full md:w-1/2 h-full">
-      <div class="bg-slate-800 text-slate-400 rounded-t-xl pl-2 p-1">Python Editor</div>
+      <div class="bg-gray-600 text-gray-50 pl-2 p-1">Python Editor</div>
       <textarea name="" id="py-editor" cols="60" rows="10">{{ $logged->level->main_code }}</textarea>
-      <div class="rounded-b-xl flex justify-between items-center bg-slate-800 p-2">
+      <div class=" flex justify-between items-center bg-slate-950 p-2">
          <button id="openModul-button" class="w-[100px] bg-slate-900 h-[50px] flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-[#fff]">
             Modul
          </button>
@@ -41,38 +41,27 @@
          <h1>{{ $logged->level->level_number }}</h1>
          <h1>{{ $logged->level->main_code }}</h1>
       </div> -->
-      <div id="user_data" data-level-number="{{ $logged->level->level_number }}">{{ $logged->level->level_number }}</div>
-      <div class="font-mono bg-neutral-800 border-gray-100 border border-solid text-gray-50 rounded-lg min-h-[100px] mt-5">
-         <div class="bg-gray-500 rounded-t-lg pl-2">Output Console</div>
+      <!-- <div id="user_data" data-level-number="{{ $logged->level->level_number }}">{{ $logged->level->level_number }}</div> -->
+      <div class="font-mono bg-slate-950 text-gray-50 mb-8 min-h-[100px]">
+         <div class="bg-gray-600 pl-2">Output Console</div>
          <div class="p-2">#Hasil kode di atas akan ditampilkan di sini</div>
          <div id="output" class="p-2"></div>
       </div>
    </div>
    <div class="w-full md:w-1/2 h-full">
-      <!-- <div class="hidden flex justify-center rounded-xl" id="game-container">
-
-         </div> -->
       <div class="stopwatch">
          <div class="text-center text-white" id="time">
-            <span class="text-3xl" id="hr">00</span>
-            <span class="text-xl">Hr</span>
-            <span class="text-3xl" id="min">00</span>
-            <span class="text-xl">Min</span>
-            <span class="text-3xl" id="sec">00</span>
-            <span class="text-xl">Sec</span>
-            <span class="text-3xl" id="count">00</span>
+            <span class="text-lg">Timer: </span>
+            <span class="text-1xl" id="hr">00</span>
+            <span class="text-lg">Hr</span>
+            <span class="text-1xl" id="min">00</span>
+            <span class="text-lg">Min</span>
+            <span class="text-1xl" id="sec">00</span>
+            <span class="text-lg">Sec</span>
+            <span class="text-1xl" id="count">00</span>
          </div>
-         <!-- <div class="mt-6 flex justify-center">
-            <button class="bg-green-500 hover:bg-green-700
-                     text-white font-bold py-2 px-4 rounded mr-2" id="start">Start</button>
-            <button class="bg-blue-500 hover:bg-blue-700
-                     text-white font-bold py-2 px-4 rounded mr-2" id="stop">Stop</button>
-            <button class="bg-red-500 hover:bg-red-700
-                     text-white font-bold py-2 px-4 rounded" id="reset">Reset</button>
-         </div> -->
       </div>
-      <div class="flex justify-center rounded-xl">
-         <!-- <canvas id="game-canvas" class="w-full bg-blue-700"></canvas> -->
+      <div class="flex justify-center rounded-xl mb-8">
          <style>
             #game-board {
                display: grid;
@@ -120,8 +109,6 @@
          </style>
          <div id="game-board"></div>
       </div>
-
-      <!-- <div class="circle"></div> -->
    </div>
 </div>
 

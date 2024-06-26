@@ -11,14 +11,24 @@
                 <button id="closeModalBtn" class="text-gray-300 hover:text-gray-600">&times;</button>
             </div>
             <div class="p-4 flex-grow overflow-auto text-gray-300">
-                <!-- <p>Your content goes here...</p> -->
-                @foreach($leaderboard as $index => $score)
-                <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $score->user->name }}</td>
-                    <td>{{ $score->total_score }}</td>
-                </tr>
-                @endforeach
+                <table class="min-w-full bg-gray-900 rounded-lg">
+                    <thead>
+                        <tr class="bg-gray-700 text-gray-300 text-left">
+                            <th class="py-2 px-4">#</th>
+                            <th class="py-2 px-4">Name</th>
+                            <th class="py-2 px-4">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($leaderboard as $index => $score)
+                        <tr class="{{ $index % 2 == 0 ? 'bg-gray-800' : 'bg-gray-700' }}">
+                            <td class="py-2 px-4">{{ $index + 1 }}</td>
+                            <td class="py-2 px-4">{{ $score->user->name }}</td>
+                            <td class="py-2 px-4">{{ $score->total_score }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
             <div class="flex justify-end p-4 border-t border-gray-500">
                 <button id="closeModalBtnFooter" class="bg-red-500 text-white px-4 py-2 rounded">Close</button>
@@ -73,6 +83,7 @@
     <div id="large-header" class="large-header">
         <canvas id="demo-canvas"></canvas>
         <div class=" main-title flex flex-col items-center space-y-4">
+            @if($logged->level->level_number > 1 && !$isFinishsed)
             <button onclick="playGame()" class="group cursor-pointer relative cursor-default w-[120px] h-[60px] bg-[linear-gradient(144deg,_#af40ff,_#5b42f3_50%,_#00ddeb)] text-white whitespace-nowrap flex flex-wrap rounded-lg overflow-hidden">
                 <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">Continue</span>
                 <div class="w-[10px] h-[10px] blur-[5px] bg-[rgb(30,41,59)] delay-[0.2s] duration-[0.4s] hover:bg-transparent hover:delay-0 hover:duration-0 group-focus:bg-transparent group-focus:delay-[0.5s]"></div>
@@ -148,12 +159,13 @@
                 <div class="w-[10px] h-[10px] blur-[5px] bg-[rgb(30,41,59)] delay-[0.2s] duration-[0.4s] hover:bg-transparent hover:delay-0 hover:duration-0 group-focus:bg-transparent group-focus:delay-[0.4s]"></div>
                 <div class="w-[10px] h-[10px] blur-[5px] bg-[rgb(30,41,59)] delay-[0.2s] duration-[0.4s] hover:bg-transparent hover:delay-0 hover:duration-0 group-focus:bg-transparent group-focus:delay-[1.35s]"></div>
             </button>
+            @endif
             <script>
                 function playGame() {
                     window.location.href = "{{ url('/game') }}";
                 }
             </script>
-            <button class="group cursor-pointer relative cursor-default w-[120px] h-[60px] bg-[linear-gradient(144deg,_#af40ff,_#5b42f3_50%,_#00ddeb)] text-white whitespace-nowrap flex flex-wrap rounded-lg overflow-hidden">
+            <button id="newGame-button" class="group cursor-pointer relative cursor-default w-[120px] h-[60px] bg-[linear-gradient(144deg,_#af40ff,_#5b42f3_50%,_#00ddeb)] text-white whitespace-nowrap flex flex-wrap rounded-lg overflow-hidden">
                 <span class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">New Game</span>
                 <div class="w-[10px] h-[10px] blur-[5px] bg-[rgb(30,41,59)] delay-[0.2s] duration-[0.4s] hover:bg-transparent hover:delay-0 hover:duration-0 group-focus:bg-transparent group-focus:delay-[0.5s]"></div>
                 <div class="w-[10px] h-[10px] blur-[5px] bg-[rgb(30,41,59)] delay-[0.2s] duration-[0.4s] hover:bg-transparent hover:delay-0 hover:duration-0 group-focus:bg-transparent group-focus:delay-[2s]"></div>
@@ -516,6 +528,19 @@
                 if ($(event.target).is('#myModal')) {
                     $('#myModal').addClass('hidden');
                 }
+            });
+
+            $('#newGame-button').click(function() {
+                Swal.fire({
+                    title: 'New Game?',
+                    text: 'This action will override your saved proccess!',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/new-game';
+                    }
+                });
             });
 
         })();
