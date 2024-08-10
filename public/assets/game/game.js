@@ -49,7 +49,7 @@ const editor = CodeMirror.fromTextArea(document.getElementById('py-editor'), {
           commandsArray.push(text.trim());
        },
        read: builtinRead,
-       execLimit: 200, // limit execution
+       execLimit: 7000, // limit execution
     });
 
     (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'output';

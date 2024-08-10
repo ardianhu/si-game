@@ -22,7 +22,8 @@ class HomeController extends Controller
 
         $logged = auth()->user();
         $isFinished = Score::where('user_id', $logged->id)->where('level_id', 7)->first();
-        return view('landing', compact('leaderboard', 'logged', 'isFinished'));
+        $isOnTheWay = Score::where('user_id', $logged->id)->first();
+        return view('landing', compact('leaderboard', 'logged', 'isFinished', 'isOnTheWay'));
     }
 
     public function game()
@@ -51,6 +52,8 @@ class HomeController extends Controller
         $user_id = $logged->id;
         $time = $request->input('time');
 
+        $time = $request->input('time');
+
         // Parse the time string
         list($hour, $minute, $second) = explode(':', $time);
         $totalSeconds = ($hour * 3600) + ($minute * 60) + $second;
@@ -58,15 +61,22 @@ class HomeController extends Controller
         // Calculate the score
         $baseScore = 1000;
         $timeThreshold = 20;
-        $penaltyPerSecond = 10;
+        $maxTime = 300;
 
+        // Ensure the penalty calculation only starts after the threshold
         if ($totalSeconds > $timeThreshold) {
-            $penalty = ($totalSeconds - $timeThreshold) * $penaltyPerSecond;
+            // Calculate the proportion of time spent beyond the threshold
+            $timeBeyondThreshold = $totalSeconds - $timeThreshold;
+
+            // Calculate the penalty
+            // This ensures a linear decrease from baseScore to 0 over the period from $timeThreshold to $maxTime
+            $penalty = ($timeBeyondThreshold / ($maxTime - $timeThreshold)) * $baseScore;
         } else {
             $penalty = 0;
         }
 
-        $finalScore = max($baseScore - $penalty, 0); // Ensure score doesn't go negative
+        // Ensure the final score doesn't go below 0
+        $finalScore = max($baseScore - $penalty, 0);
 
         $old_level = Level::where('level_number', $level)->first();
         $new_level = Level::where('level_number', $level + 1)->first();

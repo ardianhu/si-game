@@ -30,7 +30,6 @@
 <body class="text-gray-800 antialiased">
     @show
     <div>
-        @include('layouts.navbar')
         <div class="">
             @yield('content')
         </div>

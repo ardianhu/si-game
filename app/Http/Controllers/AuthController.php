@@ -29,12 +29,12 @@ class AuthController extends Controller
         if (auth()->attempt(['email' => $email, 'password' => $password])) {
             return response()->json([
                 'success' => true,
-                'message' => 'Login Berhasil!'
+                'message' => 'Login success!'
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Login Gagal!'
+                'message' => 'Login failed!'
             ], 401);
         }
     }
@@ -81,7 +81,7 @@ class AuthController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Register Berhasil!'
+            'message' => 'Register Success! please login'
         ], 200);
     }
     public function logout()
